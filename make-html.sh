@@ -4,7 +4,6 @@
 pandoc                              \
     --to html5                      \
     --section-divs                  \
-    --smart                         \
     --standalone                    \
     --mathjax                       \
     --include-before    "$2"        \

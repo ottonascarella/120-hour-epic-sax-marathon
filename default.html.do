@@ -15,7 +15,7 @@ fi
 pandoc                                  \
     --to html5                          \
     --section-divs                      \
-    --smart                             \
+    +smart                              \
     --standalone                        \
     --mathjax                           \
     --include-before    <(echo $BEFORE) \
