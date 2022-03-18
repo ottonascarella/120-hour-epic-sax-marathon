@@ -1,39 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>I am a horse in the land of booleans</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="css/base.css">
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/base.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="js/exercise-list.js"></script>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -57,192 +110,287 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </nav>
 <div class="container">
   <div class="main-content">
-<header>
+<header id="title-block-header">
 <h1 class="title">I am a horse in the land of booleans</h1>
 </header>
 <blockquote>
-<p>Any program is only as good as it is useful. <small>Linus Torvalds</small></p>
+<p>Any program is only as good as it is useful. <small>Linus
+Torvalds</small></p>
 </blockquote>
 <section id="fork-this" class="level2">
 <h2>Fork this</h2>
-<p><a href="https://github.com/iloveponies/i-am-a-horse-in-the-land-of-booleans">https://github.com/iloveponies/i-am-a-horse-in-the-land-of-booleans</a></p>
-<p><a href="basic-tools.html#how-to-submit-answers-to-exercises">Here</a> are the instructions if you need them. Be sure to fork the repository behind the link above.</p>
+<p><a
+href="https://github.com/iloveponies/i-am-a-horse-in-the-land-of-booleans">https://github.com/iloveponies/i-am-a-horse-in-the-land-of-booleans</a></p>
+<p><a
+href="basic-tools.html#how-to-submit-answers-to-exercises">Here</a> are
+the instructions if you need them. Be sure to fork the repository behind
+the link above.</p>
 </section>
 <section id="if-then-else" class="level2">
 <h2>If then else</h2>
-<p>Any non-trivial program needs conditionals. Clojure’s <code>if</code> looks like the following:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">if</span> (my-father? darth-vader)  <span class="co">; Conditional</span>
-  (lose-hand me)              <span class="co">; If true</span>
-  (gain-hat me))              <span class="co">; If false</span></code></pre>
-<p><code>if</code> (usually) takes three parameters: the conditional clause, the <em>then</em> body and the <em>else</em> body. If the first parameter - the conditional clause - is true, the <em>then</em> body is evaluated. Otherwise, the <em>else</em> body is evaluated.</p>
-<p>Clojure has two boolean values: <code>true</code> and <code>false</code>. However, all values can be used in a boolean context like <code>if</code>. Everything except <code>nil</code> and <code>false</code> acts as <code>true</code>. For example, all of the following are valid Clojure:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">if</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span>
-(<span class="kw">if</span> <span class="dv">0</span>     <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span>
-(<span class="kw">if</span> []    <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span>
-(<span class="kw">if</span> false <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;falsey&quot;</span>
-(<span class="kw">if</span> nil   <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;falsey&quot;</span></code></pre>
-<p><code>nil</code> is Clojure’s <code>null</code> value. We’ll talk about it later.</p>
-<p>To make it easier to talk about values in boolean context, we define the following terminology:</p>
+<p>Any non-trivial program needs conditionals. Clojure’s <code>if</code>
+looks like the following:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> (my-father? darth-vader)  <span class="co">; Conditional</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (lose-hand me)              <span class="co">; If true</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  (gain-hat me))              <span class="co">; If false</span></span></code></pre></div>
+<p><code>if</code> (usually) takes three parameters: the conditional
+clause, the <em>then</em> body and the <em>else</em> body. If the first
+parameter - the conditional clause - is true, the <em>then</em> body is
+evaluated. Otherwise, the <em>else</em> body is evaluated.</p>
+<p>Clojure has two boolean values: <code>true</code> and
+<code>false</code>. However, all values can be used in a boolean context
+like <code>if</code>. Everything except <code>nil</code> and
+<code>false</code> acts as <code>true</code>. For example, all of the
+following are valid Clojure:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> <span class="dv">0</span>     <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> []    <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;truthy&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> <span class="va">false</span> <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;falsey&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> <span class="va">nil</span>   <span class="st">&quot;truthy&quot;</span> <span class="st">&quot;falsey&quot;</span>) <span class="co">;=&gt; &quot;falsey&quot;</span></span></code></pre></div>
+<p><code>nil</code> is Clojure’s <code>null</code> value. We’ll talk
+about it later.</p>
+<p>To make it easier to talk about values in boolean context, we define
+the following terminology:</p>
 <ul>
-<li><p>If a value is considered true in boolean context, we call it <em>truthy</em>.</p></li>
-<li><p>If a value is considered false, we call it <em>falsey</em>.</p></li>
+<li><p>If a value is considered true in boolean context, we call it
+<em>truthy</em>.</p></li>
+<li><p>If a value is considered false, we call it
+<em>falsey</em>.</p></li>
 </ul>
-<p>Any value can be turned into <code>true</code> or <code>false</code> with the <code>boolean</code> function:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">boolean</span> <span class="st">&quot;foo&quot;</span>)   <span class="co">;=&gt; true</span>
-(<span class="kw">boolean</span> nil)     <span class="co">;=&gt; false</span></code></pre>
-<section class="alert alert-success"><h3>
+<p>Any value can be turned into <code>true</code> or <code>false</code>
+with the <code>boolean</code> function:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="st">&quot;foo&quot;</span>)   <span class="co">;=&gt; true</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="va">nil</span>)     <span class="co">;=&gt; false</span></span></code></pre></div>
+<section class="alert alert-success">
+<h3>
 Exercise 1
 </h3>
-<p>Implement <code>(boolean x)</code>, which works like the built-in <code>boolean</code> function: for <code>nil</code> and <code>false</code>, it returns <code>false</code>, and for all other values it returns <code>true</code>. You can use <code>if</code> in its implementation, but not the build-in <code>boolean</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">boolean</span> <span class="st">&quot;foo&quot;</span>) <span class="co">;=&gt; true</span>
-(<span class="kw">boolean</span> nil) <span class="co">;=&gt; false</span>
-(<span class="kw">boolean</span> (<span class="kw">+</span> <span class="dv">2</span> <span class="dv">3</span>)) <span class="co">;=&gt; true</span>
-(<span class="kw">boolean</span> true) <span class="co">;=&gt; true</span>
-(<span class="kw">boolean</span> false) <span class="co">;=&gt; false</span></code></pre>
+<p>Implement <code>(boolean x)</code>, which works like the built-in
+<code>boolean</code> function: for <code>nil</code> and
+<code>false</code>, it returns <code>false</code>, and for all other
+values it returns <code>true</code>. You can use <code>if</code> in its
+implementation, but not the build-in <code>boolean</code>.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="st">&quot;foo&quot;</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="va">nil</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> (<span class="kw">+</span> <span class="dv">2</span> <span class="dv">3</span>)) <span class="co">;=&gt; true</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="va">true</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>(<span class="kw">boolean</span> <span class="va">false</span>) <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
-
 </section>
 <section id="comparing-values" class="level2">
 <h2>Comparing values</h2>
 <p>Values can be compared for equality with <code>=</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">=</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;foo&quot;</span>)    <span class="co">;=&gt; true</span>
-(<span class="kw">=</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;bar&quot;</span>)    <span class="co">;=&gt; false</span></code></pre>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">=</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;foo&quot;</span>)    <span class="co">;=&gt; true</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">=</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;bar&quot;</span>)    <span class="co">;=&gt; false</span></span></code></pre></div>
 <p>Numerical values should be compared with <code>==</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">==</span> <span class="dv">42</span>  <span class="dv">42</span>) <span class="co">;=&gt; true</span>
-(<span class="kw">==</span> <span class="fl">5.0</span>  <span class="dv">5</span>) <span class="co">;=&gt; true</span>
-(<span class="kw">=</span>  <span class="fl">5.0</span>  <span class="dv">5</span>) <span class="co">;=&gt; false !</span></code></pre>
-<p>Note the difference between <code>=</code> and <code>==</code>: <code>==</code> disregards the actual type of the numeric value, whereas <code>=</code> requires that the numbers are of the same type.</p>
-<p>Less-than, greater-than and other such comparisons can be done with the regular <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code> and <code>&gt;=</code> operators:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">&lt;</span> <span class="dv">1</span> <span class="dv">2</span>)   <span class="co">;=&gt; true</span>
-(<span class="kw">&gt;</span> <span class="dv">1</span> <span class="dv">2</span>)   <span class="co">;=&gt; false</span>
-(<span class="kw">&lt;=</span> <span class="dv">52</span> <span class="dv">2</span>) <span class="co">;=&gt; false</span></code></pre>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">==</span> <span class="dv">42</span>  <span class="dv">42</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">==</span> <span class="fl">5.0</span>  <span class="dv">5</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">=</span>  <span class="fl">5.0</span>  <span class="dv">5</span>) <span class="co">;=&gt; false !</span></span></code></pre></div>
+<p>Note the difference between <code>=</code> and <code>==</code>:
+<code>==</code> disregards the actual type of the numeric value, whereas
+<code>=</code> requires that the numbers are of the same type.</p>
+<p>Less-than, greater-than and other such comparisons can be done with
+the regular <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code> and
+<code>&gt;=</code> operators:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">&lt;</span> <span class="dv">1</span> <span class="dv">2</span>)   <span class="co">;=&gt; true</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">&gt;</span> <span class="dv">1</span> <span class="dv">2</span>)   <span class="co">;=&gt; false</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">&lt;=</span> <span class="dv">52</span> <span class="dv">2</span>) <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
 <section id="comparing-many-values" class="level2">
 <h2>Comparing many values</h2>
-<p>All the comparison functions above take an arbitrary amount of arguments. For an example, to compare if three variables are equal, one can give them to <code>=</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">=</span> x y z) <span class="co">;=&gt; true if and only if x = y = z</span></code></pre>
-<p>The other comparison operators work similarly. You can easily check if given variables are in ascending order:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">&lt;</span> x y z q) <span class="co">;=&gt; true if and only if x &lt; y &lt; z &lt; q</span></code></pre>
-<section class="alert alert-success"><h3>
+<p>All the comparison functions above take an arbitrary amount of
+arguments. For an example, to compare if three variables are equal, one
+can give them to <code>=</code>:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">=</span> x y z) <span class="co">;=&gt; true if and only if x = y = z</span></span></code></pre></div>
+<p>The other comparison operators work similarly. You can easily check
+if given variables are in ascending order:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">&lt;</span> x y z q) <span class="co">;=&gt; true if and only if x &lt; y &lt; z &lt; q</span></span></code></pre></div>
+<section class="alert alert-success">
+<h3>
 Exercise 2
 </h3>
-<p>Write the function <code>(teen? age)</code>, which returns truthy if <code>age</code> is at least 13 and at most 19. Use only one comparison operator and give it three arguments.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(teen? <span class="dv">12</span>) <span class="co">;=&gt; false</span>
-(teen? <span class="dv">13</span>) <span class="co">;=&gt; true</span>
-(teen? <span class="dv">15</span>) <span class="co">;=&gt; true</span>
-(teen? <span class="dv">19</span>) <span class="co">;=&gt; true</span>
-(teen? <span class="dv">20</span>) <span class="co">;=&gt; false</span>
-(teen? <span class="dv">27</span>) <span class="co">;=&gt; false</span></code></pre>
+<p>Write the function <code>(teen? age)</code>, which returns truthy if
+<code>age</code> is at least 13 and at most 19. Use only one comparison
+operator and give it three arguments.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">12</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">13</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">15</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">19</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">20</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>(teen? <span class="dv">27</span>) <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
-
 </section>
 <section id="everything-has-a-value" class="level2">
 <h2>Everything has a value</h2>
-<p>In functional programming, and specifically in Clojure, everything is an expression. This is a way of saying that everything has a usable value. Concretely, <code>if</code> has a return value; the value is the value of the evaluated body (either the <em>then</em> or the <em>else</em> body).</p>
-<p>As an example, let’s define the function <code>(sign x)</code>, which returns the string <code>&quot;-&quot;</code> if <code>x</code> is negative and otherwise <code>&quot;+&quot;</code>. The function looks like the following:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> sign </span>[x]
-  (<span class="kw">if</span> (<span class="kw">&lt;</span> x <span class="dv">0</span>)
-    <span class="st">&quot;-&quot;</span>
-    <span class="st">&quot;+&quot;</span>))</code></pre>
-<p>The function definition has one expression, which is an <code>if</code> expression. The value of the function is the value of the <code>if</code> expression, because it is the last expression in the function body. The value of the <code>if</code> expression is either <code>&quot;-&quot;</code> or <code>&quot;+&quot;</code>, depending on the value of the parameter <code>x</code>.</p>
-<p>You can paste the function into the REPL and try calling it with various values of <code>x</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(sign  <span class="dv">2</span>) <span class="co">;=&gt; &quot;+&quot;</span>
-(sign -<span class="dv">2</span>) <span class="co">;=&gt; &quot;-&quot;</span>
-(sign  <span class="dv">0</span>) <span class="co">;=&gt; &quot;+&quot;</span></code></pre>
-<p>There is no need for a <code>return</code> clause – there is no such keyword in Clojure – because the return value of a function is always the value of the last expression in the body of the function.</p>
-<section class="alert alert-warning"><h3>
+<p>In functional programming, and specifically in Clojure, everything is
+an expression. This is a way of saying that everything has a usable
+value. Concretely, <code>if</code> has a return value; the value is the
+value of the evaluated body (either the <em>then</em> or the
+<em>else</em> body).</p>
+<p>As an example, let’s define the function <code>(sign x)</code>, which
+returns the string <code>"-"</code> if <code>x</code> is negative and
+otherwise <code>"+"</code>. The function looks like the following:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> sign </span>[x]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">if</span> (<span class="kw">&lt;</span> x <span class="dv">0</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;-&quot;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;+&quot;</span>))</span></code></pre></div>
+<p>The function definition has one expression, which is an
+<code>if</code> expression. The value of the function is the value of
+the <code>if</code> expression, because it is the last expression in the
+function body. The value of the <code>if</code> expression is either
+<code>"-"</code> or <code>"+"</code>, depending on the value of the
+parameter <code>x</code>.</p>
+<p>You can paste the function into the REPL and try calling it with
+various values of <code>x</code>:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(sign  <span class="dv">2</span>) <span class="co">;=&gt; &quot;+&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(sign -<span class="dv">2</span>) <span class="co">;=&gt; &quot;-&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>(sign  <span class="dv">0</span>) <span class="co">;=&gt; &quot;+&quot;</span></span></code></pre></div>
+<p>There is no need for a <code>return</code> clause – there is no such
+keyword in Clojure – because the return value of a function is always
+the value of the last expression in the body of the function.</p>
+<section class="alert alert-warning">
+<h3>
 Watch out!
 </h3>
-<p><code>if</code> does <em>not</em> have a return value in a language like Java. In other words, it is not an expression, but a statement. Because everything in Clojure is an expression, there is no equivalent construct to Java’s <code>if</code> in it.</p>
-<p>For illustration, you could use Java’s <code>if</code> to implement <code>sign</code>:</p>
-<pre class="sourceCode java"><code class="sourceCode java">String <span class="fu">sign</span>(<span class="dt">int</span> x) {
-    <span class="kw">if</span> (x &lt; <span class="dv">0</span>)
-        <span class="kw">return</span> <span class="st">&quot;-&quot;</span>;
-    <span class="kw">else</span>
-        <span class="kw">return</span> <span class="st">&quot;+&quot;</span>;
-}</code></pre>
-<p>Note that you need to use the <code>return</code> keyword to indicate when to return from the method. Compare this to Clojure, where the last expression’s value will be the function’s return value. Because Java’s <code>if</code> does not return a value, you can not say:</p>
-<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">return</span> <span class="kw">if</span> (x &lt; <span class="dv">0</span>) <span class="st">&quot;-&quot;</span> <span class="kw">else</span> <span class="st">&quot;+&quot;</span>; <span class="co">// Illegal Java!</span></code></pre>
+<p><code>if</code> does <em>not</em> have a return value in a language
+like Java. In other words, it is not an expression, but a statement.
+Because everything in Clojure is an expression, there is no equivalent
+construct to Java’s <code>if</code> in it.</p>
+<p>For illustration, you could use Java’s <code>if</code> to implement
+<code>sign</code>:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> <span class="fu">sign</span><span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;-&quot;</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;+&quot;</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Note that you need to use the <code>return</code> keyword to indicate
+when to return from the method. Compare this to Clojure, where the last
+expression’s value will be the function’s return value. Because Java’s
+<code>if</code> does not return a value, you can not say:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="st">&quot;-&quot;</span> <span class="cf">else</span> <span class="st">&quot;+&quot;</span><span class="op">;</span> <span class="co">// Illegal Java!</span></span></code></pre></div>
 </section>
-
 </section>
 <section id="conditional-evaluation" class="level2">
 <h2>Conditional evaluation</h2>
-<p>In any case, <em>only</em> the appropriate expression is evaluated. So the following is not an error:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">if</span> true
-  <span class="dv">42</span>
-  (<span class="kw">/</span> <span class="dv">1</span> <span class="dv">0</span>))</code></pre>
-<p>If evaluated, <code>(/ 1 0)</code> would throw an <code>ArithmeticException</code> due to the division by zero. However, the <code>if</code> expression does not evaluate the division at all, because the conditional clause is true and only the <em>then</em> body, <code>42</code>, is evaluated.</p>
-<section class="alert alert-success"><h3>
+<p>In any case, <em>only</em> the appropriate expression is evaluated.
+So the following is not an error:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> <span class="va">true</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">42</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">/</span> <span class="dv">1</span> <span class="dv">0</span>))</span></code></pre></div>
+<p>If evaluated, <code>(/ 1 0)</code> would throw an
+<code>ArithmeticException</code> due to the division by zero. However,
+the <code>if</code> expression does not evaluate the division at all,
+because the conditional clause is true and only the <em>then</em> body,
+<code>42</code>, is evaluated.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 3
 </h3>
-<p>Write the function <code>(abs n)</code>, which returns the absolute value of <code>n</code>, i.e. if <span class="math">\(n &lt; 0\)</span>, the value of <code>(abs n)</code> is <span class="math">\(- n\)</span>, and otherwise <span class="math">\(n\)</span>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(abs -<span class="dv">2</span>) <span class="co">;=&gt; 2</span>
-(abs <span class="dv">42</span>) <span class="co">;=&gt; 42</span></code></pre>
+<p>Write the function <code>(abs n)</code>, which returns the absolute
+value of <code>n</code>, i.e. if <span class="math inline">\(n &lt;
+0\)</span>, the value of <code>(abs n)</code> is <span
+class="math inline">\(- n\)</span>, and otherwise <span
+class="math inline">\(n\)</span>.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(abs -<span class="dv">2</span>) <span class="co">;=&gt; 2</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>(abs <span class="dv">42</span>) <span class="co">;=&gt; 42</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 4
 </h3>
-<p>Write the function <code>(divides? divisor n)</code>, which returns <code>true</code> if <code>divisor</code> divides <code>n</code> and <code>false</code> otherwise.</p>
-<p><code>(mod num div)</code> returns <code>0</code> if <code>div</code> divides <code>num</code> exactly:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">mod</span> <span class="dv">10</span> <span class="dv">5</span>) <span class="co">;=&gt; 0</span>
-(<span class="kw">mod</span> <span class="dv">3</span> <span class="dv">2</span>)  <span class="co">;=&gt; 1</span></code></pre>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(divides? <span class="dv">2</span> <span class="dv">4</span>) <span class="co">;=&gt; true</span>
-(divides? <span class="dv">4</span> <span class="dv">2</span>) <span class="co">;=&gt; false</span>
-(divides? <span class="dv">5</span> <span class="dv">10</span>) <span class="co">;=&gt; true</span>
-(divides? <span class="dv">2</span> <span class="dv">5</span>) <span class="co">;=&gt; false</span></code></pre>
+<p>Write the function <code>(divides? divisor n)</code>, which returns
+<code>true</code> if <code>divisor</code> divides <code>n</code> and
+<code>false</code> otherwise.</p>
+<p><code>(mod num div)</code> returns <code>0</code> if <code>div</code>
+divides <code>num</code> exactly:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">mod</span> <span class="dv">10</span> <span class="dv">5</span>) <span class="co">;=&gt; 0</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">mod</span> <span class="dv">3</span> <span class="dv">2</span>)  <span class="co">;=&gt; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(divides? <span class="dv">2</span> <span class="dv">4</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>(divides? <span class="dv">4</span> <span class="dv">2</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>(divides? <span class="dv">5</span> <span class="dv">10</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>(divides? <span class="dv">2</span> <span class="dv">5</span>) <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
-
 </section>
 <section id="conditioning" class="level2">
 <h2>Conditioning</h2>
-<p>When checking for multiple conditions, you can use multiple <code>if</code> clauses:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">if</span> condition1
-  true1
-  (<span class="kw">if</span> condition2
-    true2
-    (<span class="kw">if</span> condition3
-      true3
-      ...)))</code></pre>
-<p>This is similar to <code>if</code>/<code>else if</code> in languages like Java. However, the nested <code>if</code> clauses are awkward. We can rewrite the nested <code>if</code> clauses with the <code>cond</code> builtin.</p>
+<p>When checking for multiple conditions, you can use multiple
+<code>if</code> clauses:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">if</span> condition1</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  true1</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">if</span> condition2</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    true2</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">if</span> condition3</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      true3</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      ...)))</span></code></pre></div>
+<p>This is similar to <code>if</code>/<code>else if</code> in languages
+like Java. However, the nested <code>if</code> clauses are awkward. We
+can rewrite the nested <code>if</code> clauses with the
+<code>cond</code> builtin.</p>
 <p>The general form of <code>cond</code> is:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">cond</span>
-  condition1 true1
-  condition2 true2
-  condition3 true3
-  ...)</code></pre>
-<p>Like with <code>if</code>, you can have an else branch in the end. The condition for the else branch is <code>:else</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> super-sign </span>[number]
-  (<span class="kw">cond</span>
-    (<span class="kw">neg?</span> number) <span class="st">&quot;negative&quot;</span>
-    (<span class="kw">pos?</span> number) <span class="st">&quot;positive&quot;</span>
-    <span class="kw">:else</span>         <span class="st">&quot;zero&quot;</span>))
-
-(super-sign <span class="dv">13</span>) <span class="co">;=&gt; &quot;positive&quot;</span>
-(super-sign <span class="dv">0</span>)  <span class="co">;=&gt; &quot;zero&quot;</span>
-(super-sign -<span class="dv">5</span>) <span class="co">;=&gt; &quot;negative&quot;</span></code></pre>
-<section class="alert alert-success"><h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">cond</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  condition1 true1</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  condition2 true2</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  condition3 true3</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ...)</span></code></pre></div>
+<p>Like with <code>if</code>, you can have an else branch in the end.
+The condition for the else branch is <code>:else</code>.</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> super-sign </span>[number]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">cond</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">neg?</span> number) <span class="st">&quot;negative&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">pos?</span> number) <span class="st">&quot;positive&quot;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">:else</span>         <span class="st">&quot;zero&quot;</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>(super-sign <span class="dv">13</span>) <span class="co">;=&gt; &quot;positive&quot;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>(super-sign <span class="dv">0</span>)  <span class="co">;=&gt; &quot;zero&quot;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>(super-sign -<span class="dv">5</span>) <span class="co">;=&gt; &quot;negative&quot;</span></span></code></pre></div>
+<section class="alert alert-success">
+<h3>
 Exercise 5
 </h3>
 <p>Write the function <code>(fizzbuzz n)</code> that returns</p>
 <ul>
-<li><code>&quot;fizz&quot;</code> when <code>n</code> is divisible by 3,</li>
-<li><code>&quot;buzz&quot;</code> when <code>n</code> is divisible by 5,</li>
-<li><code>&quot;gotcha!&quot;</code> when <code>n</code> is divisible by 15, and</li>
-<li>the empty string <code>&quot;&quot;</code> otherwise.</li>
+<li><code>"fizz"</code> when <code>n</code> is divisible by 3,</li>
+<li><code>"buzz"</code> when <code>n</code> is divisible by 5,</li>
+<li><code>"gotcha!"</code> when <code>n</code> is divisible by 15,
+and</li>
+<li>the empty string <code>""</code> otherwise.</li>
 </ul>
-<p>Use the <code>divides?</code> function from the previous exercise.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(fizzbuzz <span class="dv">2</span>)  <span class="co">;=&gt; &quot;&quot;</span>
-(fizzbuzz <span class="dv">45</span>) <span class="co">;=&gt; &quot;gotcha!&quot;</span>
-(fizzbuzz <span class="dv">48</span>) <span class="co">;=&gt; &quot;fizz&quot;</span>
-(fizzbuzz <span class="dv">70</span>) <span class="co">;=&gt; &quot;buzz&quot;</span></code></pre>
+<p>Use the <code>divides?</code> function from the previous
+exercise.</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(fizzbuzz <span class="dv">2</span>)  <span class="co">;=&gt; &quot;&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(fizzbuzz <span class="dv">45</span>) <span class="co">;=&gt; &quot;gotcha!&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>(fizzbuzz <span class="dv">48</span>) <span class="co">;=&gt; &quot;fizz&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>(fizzbuzz <span class="dv">70</span>) <span class="co">;=&gt; &quot;buzz&quot;</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 6
 </h3>
-<p>Write a function <code>(generic-doublificate x)</code> that takes one argument and</p>
+<p>Write a function <code>(generic-doublificate x)</code> that takes one
+argument and</p>
 <ul>
 <li>doubles it if it is a number,</li>
 <li>returns nil if it is an empty collection,</li>
@@ -251,85 +399,124 @@ Exercise 6
 </ul>
 <p>You can use the following functions:</p>
 <ul>
-<li><code>(number? n)</code> returns <code>true</code> if <code>n</code> is a number.</li>
-<li><code>(empty? coll)</code> returns <code>true</code> if <code>coll</code> is empty.</li>
-<li><code>(list? coll)</code> and <code>(vector? coll)</code> test if <code>coll</code> is a list or a vector.</li>
-<li><code>(count coll)</code> returns the length of a list or a vector.</li>
+<li><code>(number? n)</code> returns <code>true</code> if <code>n</code>
+is a number.</li>
+<li><code>(empty? coll)</code> returns <code>true</code> if
+<code>coll</code> is empty.</li>
+<li><code>(list? coll)</code> and <code>(vector? coll)</code> test if
+<code>coll</code> is a list or a vector.</li>
+<li><code>(count coll)</code> returns the length of a list or a
+vector.</li>
 </ul>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(generic-doublificate <span class="dv">1</span>)        <span class="co">;=&gt; 2</span>
-(generic-doublificate [<span class="dv">1</span> <span class="dv">2</span>])    <span class="co">;=&gt; 4</span>
-(generic-doublificate &#39;(<span class="dv">65</span> <span class="dv">21</span>)) <span class="co">;=&gt; 4</span>
-(generic-doublificate {})       <span class="co">;=&gt; nil</span>
-(generic-doublificate [])       <span class="co">;=&gt; nil</span>
-(generic-doublificate {<span class="kw">:a</span> <span class="dv">1</span>})   <span class="co">;=&gt; true</span></code></pre>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(generic-doublificate <span class="dv">1</span>)        <span class="co">;=&gt; 2</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(generic-doublificate [<span class="dv">1</span> <span class="dv">2</span>])    <span class="co">;=&gt; 4</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>(generic-doublificate &#39;(<span class="dv">65</span> <span class="dv">21</span>)) <span class="co">;=&gt; 4</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>(generic-doublificate {})       <span class="co">;=&gt; nil</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>(generic-doublificate [])       <span class="co">;=&gt; nil</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>(generic-doublificate {<span class="at">:a</span> <span class="dv">1</span>})   <span class="co">;=&gt; true</span></span></code></pre></div>
 </section>
-
 </section>
 <section id="boolean-functions" class="level2">
 <h2>Boolean Functions</h2>
-<p>The common boolean functions in Clojure are <code>and</code>, <code>or</code> and <code>not</code>. These roughly match the <code>&amp;&amp;</code>, <code>||</code> and <code>!</code> operators of languages like Java.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">and</span> true true)   <span class="co">;=&gt; true</span>
-(<span class="kw">and</span> true false)  <span class="co">;=&gt; false</span>
-
-(<span class="kw">or</span>  true false)  <span class="co">;=&gt; true</span>
-(<span class="kw">or</span>  false false) <span class="co">;=&gt; false</span>
-
-(<span class="kw">not</span> true)        <span class="co">;=&gt; false</span>
-(<span class="kw">not</span> false)       <span class="co">;=&gt; true</span></code></pre>
-<p><code>and</code> and <code>or</code> take an arbitrary amount of arguments:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">and</span> true)                      <span class="co">;=&gt; true</span>
-(<span class="kw">and</span> true true true)            <span class="co">;=&gt; true</span>
-(<span class="kw">and</span> true true true true false) <span class="co">;=&gt; false</span>
-(<span class="kw">and</span>)                           <span class="co">;=&gt; true</span>
-
-(<span class="kw">or</span> false false false false true) <span class="co">;=&gt; true</span>
-(<span class="kw">or</span> false false false)            <span class="co">;=&gt; false</span>
-(<span class="kw">or</span>)                              <span class="co">;=&gt; nil</span></code></pre>
-<p>In addition to booleans, <code>and</code>, <code>or</code> and <code>not</code> accept non-boolean values as arguments as well. (Remember that <code>false</code> and <code>nil</code> are falsey and everything else is truthy.)</p>
-<p>By the way, if you have a lot of long parameters to <code>and</code>, or any function for that matter, indent them like this:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">and</span> very-long-boolean-holding-parameter
-     another-one-that-is-a-friend-of-the-previous
-     the-third-guy)</code></pre>
-<p><code>and</code> returns truthy if all of its arguments are truthy:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">and</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;bar&quot;</span>)   <span class="co">;=&gt; &quot;bar&quot;</span>
-(<span class="kw">and</span> <span class="st">&quot;foo&quot;</span>  false)  <span class="co">;=&gt; false</span>
-(<span class="kw">and</span>  <span class="dv">10</span>    nil)    <span class="co">;=&gt; nil</span></code></pre>
+<p>The common boolean functions in Clojure are <code>and</code>,
+<code>or</code> and <code>not</code>. These roughly match the
+<code>&amp;&amp;</code>, <code>||</code> and <code>!</code> operators of
+languages like Java.</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="va">true</span> <span class="va">true</span>)   <span class="co">;=&gt; true</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="va">true</span> <span class="va">false</span>)  <span class="co">;=&gt; false</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span>  <span class="va">true</span> <span class="va">false</span>)  <span class="co">;=&gt; true</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span>  <span class="va">false</span> <span class="va">false</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>(<span class="kw">not</span> <span class="va">true</span>)        <span class="co">;=&gt; false</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>(<span class="kw">not</span> <span class="va">false</span>)       <span class="co">;=&gt; true</span></span></code></pre></div>
+<p><code>and</code> and <code>or</code> take an arbitrary amount of
+arguments:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="va">true</span>)                      <span class="co">;=&gt; true</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="va">true</span> <span class="va">true</span> <span class="va">true</span>)            <span class="co">;=&gt; true</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="va">true</span> <span class="va">true</span> <span class="va">true</span> <span class="va">true</span> <span class="va">false</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span>)                           <span class="co">;=&gt; true</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span> <span class="va">false</span> <span class="va">false</span> <span class="va">false</span> <span class="va">false</span> <span class="va">true</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span> <span class="va">false</span> <span class="va">false</span> <span class="va">false</span>)            <span class="co">;=&gt; false</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span>)                              <span class="co">;=&gt; nil</span></span></code></pre></div>
+<p>In addition to booleans, <code>and</code>, <code>or</code> and
+<code>not</code> accept non-boolean values as arguments as well.
+(Remember that <code>false</code> and <code>nil</code> are falsey and
+everything else is truthy.)</p>
+<p>By the way, if you have a lot of long parameters to <code>and</code>,
+or any function for that matter, indent them like this:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> very-long-boolean-holding-parameter</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>     another-one-that-is-a-friend-of-the-previous</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>     the-third-guy)</span></code></pre></div>
+<p><code>and</code> returns truthy if all of its arguments are
+truthy:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="st">&quot;foo&quot;</span> <span class="st">&quot;bar&quot;</span>)   <span class="co">;=&gt; &quot;bar&quot;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span> <span class="st">&quot;foo&quot;</span>  <span class="va">false</span>)  <span class="co">;=&gt; false</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">and</span>  <span class="dv">10</span>    <span class="va">nil</span>)    <span class="co">;=&gt; nil</span></span></code></pre></div>
 <p><code>or</code> returns truthy if any of its arguments is truthy:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">or</span>  <span class="st">&quot;foo&quot;</span>  false)  <span class="co">;=&gt; &quot;foo&quot;</span>
-(<span class="kw">or</span>   <span class="dv">42</span>    true)   <span class="co">;=&gt; 42</span></code></pre>
-<p><code>not</code> returns <code>true</code> if its argument is falsey and <code>false</code> if its argument is truthy:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">not</span> <span class="st">&quot;foo&quot;</span>)         <span class="co">;=&gt; false</span>
-(<span class="kw">not</span> nil)           <span class="co">;=&gt; true</span>
-(<span class="kw">not</span> [])            <span class="co">;=&gt; false</span></code></pre>
-<p>This behaviour might look surprising, but it is consistent. What’s happening is that if all the arguments to <code>and</code> are truthy, it returns the value of the last argument. Otherwise, it returns the value of the first falsey argument. Conversely, <code>or</code> returns either the first truthy value or the last falsey value.</p>
-<p>While it might seem odd that boolean functions return non-boolean values, remember that all values in Clojure in fact act as boolean values. This behaviour is useful in many situations. For an example, it allows you to provide default values for variables when taking input:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> server-port </span>(<span class="kw">or</span> user-input <span class="dv">80</span>))</code></pre>
-<p>Note that this can only be used in situations where the input may not take the values <code>false</code> or <code>nil</code>.</p>
-<section class="alert alert-success"><h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span>  <span class="st">&quot;foo&quot;</span>  <span class="va">false</span>)  <span class="co">;=&gt; &quot;foo&quot;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">or</span>   <span class="dv">42</span>    <span class="va">true</span>)   <span class="co">;=&gt; 42</span></span></code></pre></div>
+<p><code>not</code> returns <code>true</code> if its argument is falsey
+and <code>false</code> if its argument is truthy:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">not</span> <span class="st">&quot;foo&quot;</span>)         <span class="co">;=&gt; false</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">not</span> <span class="va">nil</span>)           <span class="co">;=&gt; true</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>(<span class="kw">not</span> [])            <span class="co">;=&gt; false</span></span></code></pre></div>
+<p>This behaviour might look surprising, but it is consistent. What’s
+happening is that if all the arguments to <code>and</code> are truthy,
+it returns the value of the last argument. Otherwise, it returns the
+value of the first falsey argument. Conversely, <code>or</code> returns
+either the first truthy value or the last falsey value.</p>
+<p>While it might seem odd that boolean functions return non-boolean
+values, remember that all values in Clojure in fact act as boolean
+values. This behaviour is useful in many situations. For an example, it
+allows you to provide default values for variables when taking
+input:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> server-port </span>(<span class="kw">or</span> user-input <span class="dv">80</span>))</span></code></pre></div>
+<p>Note that this can only be used in situations where the input may not
+take the values <code>false</code> or <code>nil</code>.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 7
 </h3>
-<p>Write the function <code>(not-teen? age)</code>, which returns <code>true</code> when teen? returns <code>false</code> and <code>false</code> otherwise.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(not-teen? <span class="dv">13</span>) <span class="co">;=&gt; false</span>
-(not-teen? <span class="dv">25</span>) <span class="co">;=&gt; true</span>
-(not-teen? <span class="dv">12</span>) <span class="co">;=&gt; true</span>
-(not-teen? <span class="dv">19</span>) <span class="co">;=&gt; false</span>
-(not-teen? <span class="dv">20</span>) <span class="co">;=&gt; true</span></code></pre>
+<p>Write the function <code>(not-teen? age)</code>, which returns
+<code>true</code> when teen? returns <code>false</code> and
+<code>false</code> otherwise.</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(not-teen? <span class="dv">13</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>(not-teen? <span class="dv">25</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>(not-teen? <span class="dv">12</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>(not-teen? <span class="dv">19</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>(not-teen? <span class="dv">20</span>) <span class="co">;=&gt; true</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 8
 </h3>
-<p>Write the function <code>(leap-year? year)</code>, which returns <code>true</code> if <code>year</code> is a leap year, otherwise <code>false</code>. A year is a leap year if it is divisible by 4, except if it is divisible by 100, in which case it still is a leap year if it is divisible by 400.</p>
-<p>See <a href="http://en.wikipedia.org/wiki/Leap_year#Algorithm">Wikipedia</a> for a simple pseudocode solution.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(leap-year? <span class="dv">100</span>) <span class="co">;=&gt; false</span>
-(leap-year? <span class="dv">200</span>) <span class="co">;=&gt; false</span>
-(leap-year? <span class="dv">400</span>) <span class="co">;=&gt; true</span>
-(leap-year? <span class="dv">12</span>)  <span class="co">;=&gt; true</span>
-(leap-year? <span class="dv">20</span>)  <span class="co">;=&gt; true</span>
-(leap-year? <span class="dv">15</span>)  <span class="co">;=&gt; false</span></code></pre>
+<p>Write the function <code>(leap-year? year)</code>, which returns
+<code>true</code> if <code>year</code> is a leap year, otherwise
+<code>false</code>. A year is a leap year if it is divisible by 4,
+except if it is divisible by 100, in which case it still is a leap year
+if it is divisible by 400.</p>
+<p>See <a
+href="http://en.wikipedia.org/wiki/Leap_year#Algorithm">Wikipedia</a>
+for a simple pseudocode solution.</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">100</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">200</span>) <span class="co">;=&gt; false</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">400</span>) <span class="co">;=&gt; true</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">12</span>)  <span class="co">;=&gt; true</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">20</span>)  <span class="co">;=&gt; true</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>(leap-year? <span class="dv">15</span>)  <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
-
-
 <p><a href="structured-data.html">Proceed to structuration! →</a></p>
 </section>
 <footer>

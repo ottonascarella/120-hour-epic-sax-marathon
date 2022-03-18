@@ -1,39 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Sudoku</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="css/base.css">
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/base.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="js/exercise-list.js"></script>
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -57,389 +110,549 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </nav>
 <div class="container">
   <div class="main-content">
-<header>
+<header id="title-block-header">
 <h1 class="title">Sudoku</h1>
 </header>
 <section id="fork-this" class="level2">
 <h2>Fork this</h2>
-<p><a href="https://github.com/iloveponies/sudoku">https://github.com/iloveponies/sudoku</a></p>
+<p><a
+href="https://github.com/iloveponies/sudoku">https://github.com/iloveponies/sudoku</a></p>
 </section>
 <section id="fight" class="level2">
 <h2>Fight!</h2>
-<p>First of all, we need to have a representation for sudoku boards. Here is one.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-        [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-        [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]
-        [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]
-        [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]
-        [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]
-        [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]
-        [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]
-        [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]])</code></pre>
-<p>Here <code>0</code> is used to encode an empty square in a sudoku board.</p>
-<p>The <code>board</code> function is intended to transform a nested vector structure to some internal representation. Since these nested vectors work just fine for now, <code>board</code> doesn’t have to do anything.</p>
-<p>The standard library defines a function called <code>identity</code> that just returns its parameter:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">identity</span> <span class="dv">13</span>) <span class="co">;=&gt; 13</span>
-(<span class="kw">identity</span> <span class="st">&quot;:)&quot;</span>) <span class="co">;=&gt; &quot;:)&quot;</span></code></pre>
-<p>Using <code>identity</code>, we can define <code>board</code> easily:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> board </span><span class="kw">identity</span>)</code></pre>
-<p>You’re going to need the set of numbers used in sudoku often, so let’s define them as a set:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> all-values </span>#{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span>})</code></pre>
-<p>In sudoku, one needs to fill a board so that every line, every column and every block has the numbers from 1 to 9 exactly once. Blocks are 3x3 areas inside the sudoku board.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure"><span class="co">;[[5 3 0 | 0 7 0 | 0 0 0]</span>
-<span class="co">; [6 0 0 | 1 9 5 | 0 0 0]</span>
-<span class="co">; [0 9 8 | 0 0 0 | 0 6 0]</span>
-<span class="co">; -------+-------+-------</span>
-<span class="co">; [8 0 0 | 0 6 0 | 0 0 3]</span>
-<span class="co">; [4 0 0 | 8 0 3 | 0 0 1]</span>
-<span class="co">; [7 0 0 | 0 2 0 | 0 0 6]</span>
-<span class="co">; -------+-------+-------</span>
-<span class="co">; [0 6 0 | 0 0 0 | 2 8 0]</span>
-<span class="co">; [0 0 0 | 4 1 9 | 0 0 5]</span>
-<span class="co">; [0 0 0 | 0 8 0 | 0 7 9]]</span></code></pre>
+<p>First of all, we need to have a representation for sudoku boards.
+Here is one.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]])</span></code></pre></div>
+<p>Here <code>0</code> is used to encode an empty square in a sudoku
+board.</p>
+<p>The <code>board</code> function is intended to transform a nested
+vector structure to some internal representation. Since these nested
+vectors work just fine for now, <code>board</code> doesn’t have to do
+anything.</p>
+<p>The standard library defines a function called <code>identity</code>
+that just returns its parameter:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">identity</span> <span class="dv">13</span>) <span class="co">;=&gt; 13</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">identity</span> <span class="st">&quot;:)&quot;</span>) <span class="co">;=&gt; &quot;:)&quot;</span></span></code></pre></div>
+<p>Using <code>identity</code>, we can define <code>board</code>
+easily:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> board </span><span class="kw">identity</span>)</span></code></pre></div>
+<p>You’re going to need the set of numbers used in sudoku often, so
+let’s define them as a set:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> all-values </span>#{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span>})</span></code></pre></div>
+<p>In sudoku, one needs to fill a board so that every line, every column
+and every block has the numbers from 1 to 9 exactly once. Blocks are 3x3
+areas inside the sudoku board.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">;[[5 3 0 | 0 7 0 | 0 0 0]</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">; [6 0 0 | 1 9 5 | 0 0 0]</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">; [0 9 8 | 0 0 0 | 0 6 0]</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">; -------+-------+-------</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">; [8 0 0 | 0 6 0 | 0 0 3]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">; [4 0 0 | 8 0 3 | 0 0 1]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">; [7 0 0 | 0 2 0 | 0 0 6]</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">; -------+-------+-------</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">; [0 6 0 | 0 0 0 | 2 8 0]</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">; [0 0 0 | 4 1 9 | 0 0 5]</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">; [0 0 0 | 0 8 0 | 0 7 9]]</span></span></code></pre></div>
 </section>
 <section id="working-with-nested-structures" class="level2">
 <h2>Working with nested structures</h2>
-<p>Getting values from nested structures with <code>get</code> gets ugly:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">get</span> (<span class="kw">get</span> [[<span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span>] [<span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>]] <span class="dv">0</span>) <span class="dv">1</span>)
-<span class="co">;=&gt; (get [&quot;a&quot; &quot;b&quot;] 1)</span>
-<span class="co">;=&gt; &quot;b&quot;</span></code></pre>
-<p>To remedy this, there is <code>(get-in nested-structure directives)</code></p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">get-in</span> [[<span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span>] [<span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>]] [<span class="dv">0</span> <span class="dv">1</span>])
-<span class="co">;=&gt; (get (get [[&quot;a&quot; &quot;b&quot;] [&quot;c&quot; &quot;d&quot;]] 0) 1)</span>
-<span class="co">;=&gt; (get [&quot;a&quot; &quot;b&quot;]                     1)</span>
-<span class="co">;=&gt; &quot;b&quot;</span></code></pre>
-<p>It works with everything that supports get, including maps and vectors.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> cities </span>{<span class="kw">:title</span> <span class="st">&quot;The City and the City&quot;</span>
-             <span class="kw">:author</span> {<span class="kw">:name</span> <span class="st">&quot;China Miéville&quot;</span>
-                      <span class="kw">:birth-year</span> <span class="dv">1972</span>}})
-
-(<span class="kw">get-in</span> cities [<span class="kw">:author</span> <span class="kw">:name</span>])
-<span class="co">;=&gt; (get (get cities :author)                       :name)</span>
-<span class="co">;=&gt; (get {:name &quot;China Miéville&quot;, :birth-year 1972} :name)</span>
-<span class="co">;=&gt; &quot;China Miéville&quot;</span></code></pre>
-<p>There are two other functions for dealing with nested structures, <code>assoc-in</code> and <code>update-in</code>. We will talk about <code>assoc-in</code> in a bit.</p>
+<p>Getting values from nested structures with <code>get</code> gets
+ugly:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">get</span> (<span class="kw">get</span> [[<span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span>] [<span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>]] <span class="dv">0</span>) <span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (get [&quot;a&quot; &quot;b&quot;] 1)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; &quot;b&quot;</span></span></code></pre></div>
+<p>To remedy this, there is
+<code>(get-in nested-structure directives)</code></p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">get-in</span> [[<span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span>] [<span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>]] [<span class="dv">0</span> <span class="dv">1</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (get (get [[&quot;a&quot; &quot;b&quot;] [&quot;c&quot; &quot;d&quot;]] 0) 1)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (get [&quot;a&quot; &quot;b&quot;]                     1)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; &quot;b&quot;</span></span></code></pre></div>
+<p>It works with everything that supports get, including maps and
+vectors.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> cities </span>{<span class="at">:title</span> <span class="st">&quot;The City and the City&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">:author</span> {<span class="at">:name</span> <span class="st">&quot;China Miéville&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">:birth-year</span> <span class="dv">1972</span>}})</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>(<span class="kw">get-in</span> cities [<span class="at">:author</span> <span class="at">:name</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (get (get cities :author)                       :name)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (get {:name &quot;China Miéville&quot;, :birth-year 1972} :name)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; &quot;China Miéville&quot;</span></span></code></pre></div>
+<p>There are two other functions for dealing with nested structures,
+<code>assoc-in</code> and <code>update-in</code>. We will talk about
+<code>assoc-in</code> in a bit.</p>
 <p>Here is an example sudoku board together with its solution:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> sudoku-board</span>
-  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]
-          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]
-          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]
-          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]
-          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))
-
-(<span class="kw">def</span><span class="fu"> solved-board</span>
-  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">1</span> <span class="dv">2</span>]
-          [<span class="dv">6</span> <span class="dv">7</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">8</span>]
-          [<span class="dv">1</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span>]
-          [<span class="dv">8</span> <span class="dv">5</span> <span class="dv">9</span> <span class="dv">7</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">3</span>]
-          [<span class="dv">4</span> <span class="dv">2</span> <span class="dv">6</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">7</span> <span class="dv">9</span> <span class="dv">1</span>]
-          [<span class="dv">7</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">9</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">6</span>]
-          [<span class="dv">9</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">7</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">4</span>]
-          [<span class="dv">2</span> <span class="dv">8</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">5</span>]
-          [<span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">9</span>]]))</code></pre>
-<section class="alert alert-success"><h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> sudoku-board</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> solved-board</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">1</span> <span class="dv">2</span>]</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">6</span> <span class="dv">7</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">8</span>]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">1</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span>]</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">8</span> <span class="dv">5</span> <span class="dv">9</span> <span class="dv">7</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">3</span>]</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">4</span> <span class="dv">2</span> <span class="dv">6</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">7</span> <span class="dv">9</span> <span class="dv">1</span>]</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">7</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">9</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">6</span>]</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">9</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">7</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">4</span>]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">2</span> <span class="dv">8</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">5</span>]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">6</span> <span class="dv">1</span> <span class="dv">7</span> <span class="dv">9</span>]]))</span></code></pre></div>
+<section class="alert alert-success">
+<h3>
 Exercise 1
 </h3>
-<p>Write the function <code>(value-at board coordinates)</code> that returns the value at <code>coordinate</code> in <code>board</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(value-at sudoku-board [<span class="dv">0</span> <span class="dv">1</span>]) <span class="co">;=&gt; 3</span>
-(value-at sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; 5</span></code></pre>
+<p>Write the function <code>(value-at board coordinates)</code> that
+returns the value at <code>coordinate</code> in <code>board</code>:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(value-at sudoku-board [<span class="dv">0</span> <span class="dv">1</span>]) <span class="co">;=&gt; 3</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(value-at sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; 5</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 2
 </h3>
-<p>Write the function <code>(has-value? board coordinates)</code> that returns <code>false</code> if the square at <code>coordinates</code> is empty (has <code>0</code>), and otherwise <code>true</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(has-value? sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; true</span>
-(has-value? sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; false</span></code></pre>
+<p>Write the function <code>(has-value? board coordinates)</code> that
+returns <code>false</code> if the square at <code>coordinates</code> is
+empty (has <code>0</code>), and otherwise <code>true</code>.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(has-value? sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; true</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(has-value? sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; false</span></span></code></pre></div>
 </section>
-
-<p>Now we can check if square is empty. To figure out which numbers are valid for a square we need to know which are already taken. Let’s write a couple of functions to figure this out.</p>
-<section class="alert alert-success"><h3>
+<p>Now we can check if square is empty. To figure out which numbers are
+valid for a square we need to know which are already taken. Let’s write
+a couple of functions to figure this out.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 3
 </h3>
-<p>Write the function <code>(row-values board coordinates)</code> that returns a set with all numbers on the row of the coordinates</p>
-<p>Remember that you can use destructing inside the parameter vector to get the row.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(row-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 5 3 7}</span>
-(row-values sudoku-board [<span class="dv">3</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 8 6 3}</span></code></pre>
+<p>Write the function <code>(row-values board coordinates)</code> that
+returns a set with all numbers on the row of the coordinates</p>
+<p>Remember that you can use destructing inside the parameter vector to
+get the row.</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(row-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 5 3 7}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(row-values sudoku-board [<span class="dv">3</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 8 6 3}</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 4
 </h3>
-<p>Write the function <code>(col-values board coordinates)</code> that returns a set with all numbers on the col of the coordinates</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(col-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 8}</span>
-(col-values sudoku-board [<span class="dv">4</span> <span class="dv">8</span>]) <span class="co">;=&gt; #{3 1 6 0 5 9}</span></code></pre>
+<p>Write the function <code>(col-values board coordinates)</code> that
+returns a set with all numbers on the col of the coordinates</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(col-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 8}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>(col-values sudoku-board [<span class="dv">4</span> <span class="dv">8</span>]) <span class="co">;=&gt; #{3 1 6 0 5 9}</span></span></code></pre></div>
 </section>
-
-<p>Finally, we need to figure out what numbers are inside the block of a square.</p>
-<p>To make working with blocks a little easier, let’s take a small detour.</p>
-<p>You can use <code>for</code> to go through a sequence like with <code>map</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">for</span> [number [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>]]
-  (<span class="kw">+</span> number <span class="dv">2</span>))
-<span class="co">;=&gt; (3 4 5)</span></code></pre>
-<p>Here the name <code>number</code> gets bound to each value of the sequence <code>[1 2 3]</code> one by one. For each value, evaluate the body <code>(+ number 2)</code> with it and collect the results into a sequence.</p>
-<p>But you can give <code>for</code> multiple bindings, and it will go through all combinations:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">for</span> [<span class="kw">name</span> [<span class="st">&quot;John&quot;</span> <span class="st">&quot;Jane&quot;</span>]
-      number [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>]]
-  (<span class="kw">str</span> <span class="kw">name</span> <span class="st">&quot; &quot;</span> number))
-<span class="co">;=&gt; (&quot;John 1&quot; &quot;John 2&quot; &quot;John 3&quot; &quot;Jane 1&quot; &quot;Jane 2&quot; &quot;Jane 3&quot;)</span></code></pre>
-<p>If you happen to be familiar with list comprehensions from some other language, <code>for</code> is Clojures list comprehension form.</p>
-<p>To make working with coordinates a bit easier, let’s write a function that returns a sequence of coordinate pairs.</p>
-<section class="alert alert-success"><h3>
+<p>Finally, we need to figure out what numbers are inside the block of a
+square.</p>
+<p>To make working with blocks a little easier, let’s take a small
+detour.</p>
+<p>You can use <code>for</code> to go through a sequence like with
+<code>map</code>:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">for</span> [number [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>]]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">+</span> number <span class="dv">2</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (3 4 5)</span></span></code></pre></div>
+<p>Here the name <code>number</code> gets bound to each value of the
+sequence <code>[1 2 3]</code> one by one. For each value, evaluate the
+body <code>(+ number 2)</code> with it and collect the results into a
+sequence.</p>
+<p>But you can give <code>for</code> multiple bindings, and it will go
+through all combinations:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">for</span> [<span class="kw">name</span> [<span class="st">&quot;John&quot;</span> <span class="st">&quot;Jane&quot;</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>      number [<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>]]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">str</span> <span class="kw">name</span> <span class="st">&quot; &quot;</span> number))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (&quot;John 1&quot; &quot;John 2&quot; &quot;John 3&quot; &quot;Jane 1&quot; &quot;Jane 2&quot; &quot;Jane 3&quot;)</span></span></code></pre></div>
+<p>If you happen to be familiar with list comprehensions from some other
+language, <code>for</code> is Clojures list comprehension form.</p>
+<p>To make working with coordinates a bit easier, let’s write a function
+that returns a sequence of coordinate pairs.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 5
 </h3>
-<p>Write the function <code>(coord-pairs coord-sequence)</code> that returns all coordinate-pairs of the form <code>[row col]</code> where <code>row</code> is from <code>coord-sequence</code> and <code>col</code> is from <code>coord-sequence</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(coord-pairs [<span class="dv">0</span> <span class="dv">1</span>])   <span class="co">;=&gt; [[0 0] [0 1]</span>
-                      <span class="co">;    [1 0] [1 1]]</span>
-
-(coord-pairs [<span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span>]) <span class="co">;=&gt; [[0 0] [0 1] [0 2]</span>
-                      <span class="co">;    [1 0] [1 1] [1 2]</span>
-                      <span class="co">;    [2 0] [2 1] [2 2]]</span></code></pre>
+<p>Write the function <code>(coord-pairs coord-sequence)</code> that
+returns all coordinate-pairs of the form <code>[row col]</code> where
+<code>row</code> is from <code>coord-sequence</code> and
+<code>col</code> is from <code>coord-sequence</code>.</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(coord-pairs [<span class="dv">0</span> <span class="dv">1</span>])   <span class="co">;=&gt; [[0 0] [0 1]</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    [1 0] [1 1]]</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>(coord-pairs [<span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span>]) <span class="co">;=&gt; [[0 0] [0 1] [0 2]</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    [1 0] [1 1] [1 2]</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    [2 0] [2 1] [2 2]]</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 6
 </h3>
-<p>Write the function <code>(block-values board coordinates)</code> that returns a set with all numbers in the block of <code>coordinates</code>.</p>
-<p>You might want to write a helper function that returns the coordinates for the top left corner of the block.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(block-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 5 3 6 8 9}</span>
-(block-values sudoku-board [<span class="dv">4</span> <span class="dv">5</span>]) <span class="co">;=&gt; #{0 6 8 3 2}</span></code></pre>
+<p>Write the function <code>(block-values board coordinates)</code> that
+returns a set with all numbers in the block of
+<code>coordinates</code>.</p>
+<p>You might want to write a helper function that returns the
+coordinates for the top left corner of the block.</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(block-values sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{0 5 3 6 8 9}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>(block-values sudoku-board [<span class="dv">4</span> <span class="dv">5</span>]) <span class="co">;=&gt; #{0 6 8 3 2}</span></span></code></pre></div>
 </section>
-
-<p>The <code>clojure.set</code> namespace has some useful functions for working with sets. <code>(clojure.set/union set1 set2 ...)</code> returns a set containing all the elements of its arguments:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(clojure.set/union #{<span class="dv">1</span> <span class="dv">2</span>} #{<span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">7</span>}) <span class="co">;=&gt; #{1 2 3 7}</span></code></pre>
-<p>In the project file, <code>clojure.set</code> is required with the shorthand <code>set</code>, so you can also just write:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(set/union #{<span class="dv">1</span> <span class="dv">2</span>} #{<span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">7</span>}) <span class="co">;=&gt; #{1 2 3 7}</span></code></pre>
-<p>Another helpful set operation is <code>(set/difference set1 set2)</code>, which returns a set with all elements of <code>set1</code> except those that are also in <code>set2</code>. Or put another way, removes all elements of <code>set2</code> from <code>set1</code>:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(set/difference #{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">1</span> <span class="dv">3</span>})   <span class="co">;=&gt; #{2}</span>
-(set/difference #{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">2</span> <span class="dv">4</span> <span class="dv">5</span>}) <span class="co">;=&gt; #{1 3}</span></code></pre>
-<section class="alert alert-success"><h3>
+<p>The <code>clojure.set</code> namespace has some useful functions for
+working with sets. <code>(clojure.set/union set1 set2 ...)</code>
+returns a set containing all the elements of its arguments:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(clojure.set/union #{<span class="dv">1</span> <span class="dv">2</span>} #{<span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">7</span>}) <span class="co">;=&gt; #{1 2 3 7}</span></span></code></pre></div>
+<p>In the project file, <code>clojure.set</code> is required with the
+shorthand <code>set</code>, so you can also just write:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(set/union #{<span class="dv">1</span> <span class="dv">2</span>} #{<span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">7</span>}) <span class="co">;=&gt; #{1 2 3 7}</span></span></code></pre></div>
+<p>Another helpful set operation is
+<code>(set/difference set1 set2)</code>, which returns a set with all
+elements of <code>set1</code> except those that are also in
+<code>set2</code>. Or put another way, removes all elements of
+<code>set2</code> from <code>set1</code>:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(set/difference #{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">1</span> <span class="dv">3</span>})   <span class="co">;=&gt; #{2}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>(set/difference #{<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span>} #{<span class="dv">2</span> <span class="dv">4</span> <span class="dv">5</span>}) <span class="co">;=&gt; #{1 3}</span></span></code></pre></div>
+<section class="alert alert-success">
+<h3>
 Exercise 7
 </h3>
-<p>Write the function <code>(valid-values-for board coordinates)</code> that returns a set with all valid numbers for the square at <code>coordinates</code>.</p>
-<p>If the square at <code>coordinates</code> already has a value, <code>valid-values</code> should return the empty set <code>#{}</code>.</p>
+<p>Write the function <code>(valid-values-for board coordinates)</code>
+that returns a set with all valid numbers for the square at
+<code>coordinates</code>.</p>
+<p>If the square at <code>coordinates</code> already has a value,
+<code>valid-values</code> should return the empty set
+<code>#{}</code>.</p>
 <p>Remember that we already defined the set <code>all-values</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(valid-values-for sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; #{}</span>
-(valid-values-for sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{1 2 4})</span></code></pre>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(valid-values-for sudoku-board [<span class="dv">0</span> <span class="dv">0</span>]) <span class="co">;=&gt; #{}</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>(valid-values-for sudoku-board [<span class="dv">0</span> <span class="dv">2</span>]) <span class="co">;=&gt; #{1 2 4})</span></span></code></pre></div>
 </section>
-
-<p>Next, let’s write a function to figure out if a sudoku board is completely filled.</p>
-<section class="alert alert-success"><h3>
+<p>Next, let’s write a function to figure out if a sudoku board is
+completely filled.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 8
 </h3>
-<p>Write the function <code>(filled? board)</code> which returns <code>true</code> if there are no empty squares in <code>board</code>, and otherwise <code>false</code>.</p>
-<p>It might help to write a helper function that returns all numbers of the board in a sequence.</p>
-<p>Remember that <code>(contains? set element)</code> can be used to check if <code>element</code> is in <code>set</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(filled? sudoku-board) <span class="co">;=&gt; false</span>
-(filled? solved-board) <span class="co">;=&gt; true</span></code></pre>
+<p>Write the function <code>(filled? board)</code> which returns
+<code>true</code> if there are no empty squares in <code>board</code>,
+and otherwise <code>false</code>.</p>
+<p>It might help to write a helper function that returns all numbers of
+the board in a sequence.</p>
+<p>Remember that <code>(contains? set element)</code> can be used to
+check if <code>element</code> is in <code>set</code>.</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(filled? sudoku-board) <span class="co">;=&gt; false</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(filled? solved-board) <span class="co">;=&gt; true</span></span></code></pre></div>
 </section>
-
-<p>Now that we can check if a board is full, it would be nice to know if the solution is valid.</p>
-<p>A sudoku is valid if each row, each column and each block contains the numbers from 1 to 9 exactly once. Let’s write functions for checking each of these conditions.</p>
-<p>To start, let’s write some functions to get the values for each row, column and block.</p>
-<section class="alert alert-success"><h3>
+<p>Now that we can check if a board is full, it would be nice to know if
+the solution is valid.</p>
+<p>A sudoku is valid if each row, each column and each block contains
+the numbers from 1 to 9 exactly once. Let’s write functions for checking
+each of these conditions.</p>
+<p>To start, let’s write some functions to get the values for each row,
+column and block.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 9
 </h3>
-<p>Write the function <code>(rows board)</code> that returns a sequence of value sets for each row of <code>board</code>. That is, the first set in <code>(rows board)</code> is a set that has every element of the first row of <code>board</code> as element and so on.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(rows sudoku-board) <span class="co">;=&gt; [#{5 3 0 7}</span>
-                    <span class="co">;    #{6 0 1 9 5}</span>
-                    <span class="co">;    #{0 9 8 6}</span>
-                    <span class="co">;    #{8 0 6 3}</span>
-                    <span class="co">;    #{4 0 8 3 1}</span>
-                    <span class="co">;    #{7 0 2 6}</span>
-                    <span class="co">;    #{0 6 2 8}</span>
-                    <span class="co">;    #{0 4 1 9 5}</span>
-                    <span class="co">;    #{0 8 7 9}]</span>
-
-(rows solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}]</span></code></pre>
-<p>Write the function <code>(cols board)</code> that returns the values of each column in <code>board</code> as a sequence of sets.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(cols sudoku-board) <span class="co">;=&gt; [#{5 6 0 8 4 7}</span>
-                    <span class="co">;    #{3 0 9 6}</span>
-                    <span class="co">;    #{0 8}</span>
-                    <span class="co">;    #{0 1 8 4}</span>
-                    <span class="co">;    #{7 9 0 6 2 1 8}</span>
-                    <span class="co">;    #{0 5 3 9}</span>
-                    <span class="co">;    #{0 2}</span>
-                    <span class="co">;    #{0 6 8 7}</span>
-                    <span class="co">;    #{0 3 1 6 5 9}]</span>
-
-(cols solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}]</span></code></pre>
+<p>Write the function <code>(rows board)</code> that returns a sequence
+of value sets for each row of <code>board</code>. That is, the first set
+in <code>(rows board)</code> is a set that has every element of the
+first row of <code>board</code> as element and so on.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(rows sudoku-board) <span class="co">;=&gt; [#{5 3 0 7}</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{6 0 1 9 5}</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 9 8 6}</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{8 0 6 3}</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{4 0 8 3 1}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{7 0 2 6}</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 6 2 8}</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 4 1 9 5}</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 8 7 9}]</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>(rows solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}]</span></span></code></pre></div>
+<p>Write the function <code>(cols board)</code> that returns the values
+of each column in <code>board</code> as a sequence of sets.</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(cols sudoku-board) <span class="co">;=&gt; [#{5 6 0 8 4 7}</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{3 0 9 6}</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 8}</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 1 8 4}</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{7 9 0 6 2 1 8}</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 5 3 9}</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 2}</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 6 8 7}</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{0 3 1 6 5 9}]</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>(cols solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>                    <span class="co">;    #{1 2 3 4 5 6 7 8 9}]</span></span></code></pre></div>
 </section>
-
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 10
 </h3>
-<p>Write the function <code>(blocks board)</code> that returns the values of each block in <code>board</code> as a sequence of sets.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(blocks sudoku-board) <span class="co">;=&gt; [#{5 3 0 6 9 8}</span>
-                      <span class="co">;    #{0 7 1 9 5}</span>
-                      <span class="co">;    #{0 6}</span>
-                      <span class="co">;    #{8 0 4 7}</span>
-                      <span class="co">;    #{0 6 8 3 2}</span>
-                      <span class="co">;    #{0 3 1 6}</span>
-                      <span class="co">;    #{0 6}</span>
-                      <span class="co">;    #{0 4 1 9 8}</span>
-                      <span class="co">;    #{2 8 0 5 7 9}]</span>
-
-(blocks solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span>
-                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}])</span></code></pre>
+<p>Write the function <code>(blocks board)</code> that returns the
+values of each block in <code>board</code> as a sequence of sets.</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(blocks sudoku-board) <span class="co">;=&gt; [#{5 3 0 6 9 8}</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 7 1 9 5}</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 6}</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{8 0 4 7}</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 6 8 3 2}</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 3 1 6}</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 6}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{0 4 1 9 8}</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{2 8 0 5 7 9}]</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>(blocks solved-board) <span class="co">;=&gt; [#{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>                      <span class="co">;    #{1 2 3 4 5 6 7 8 9}])</span></span></code></pre></div>
 </section>
-
-<p>Now we can get the values used in every row, column and block. Let’s write functions that check if every row, column and block is valid as per the rules of sudoku.</p>
-<section class="alert alert-success"><h3>
+<p>Now we can get the values used in every row, column and block. Let’s
+write functions that check if every row, column and block is valid as
+per the rules of sudoku.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 11
 </h3>
-<p>Write the function <code>(valid-rows? board)</code> that returns <code>true</code> if every row in <code>board</code> is a valid filled row.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(valid-rows? solved-board)  <span class="co">;=&gt; truthy</span>
-(valid-rows? invalid-board) <span class="co">;=&gt; falsey</span></code></pre>
-<p>Write the function <code>(valid-cols? board)</code> that returns <code>true</code> if every row in <code>board</code> is a valid filled column.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(valid-cols? solved-board)  <span class="co">;=&gt; truthy</span>
-(valid-cols? invalid-board) <span class="co">;=&gt; falsey</span></code></pre>
-<p>Write the function <code>(valid-blocks? board)</code> that returns <code>true</code> if every block in <code>board</code> is a valid filled block.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(valid-blocks? solved-board)  <span class="co">;=&gt; truthy</span>
-(valid-blocks? invalid-board) <span class="co">;=&gt; falsey</span></code></pre>
+<p>Write the function <code>(valid-rows? board)</code> that returns
+<code>true</code> if every row in <code>board</code> is a valid filled
+row.</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(valid-rows? solved-board)  <span class="co">;=&gt; truthy</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>(valid-rows? invalid-board) <span class="co">;=&gt; falsey</span></span></code></pre></div>
+<p>Write the function <code>(valid-cols? board)</code> that returns
+<code>true</code> if every row in <code>board</code> is a valid filled
+column.</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(valid-cols? solved-board)  <span class="co">;=&gt; truthy</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>(valid-cols? invalid-board) <span class="co">;=&gt; falsey</span></span></code></pre></div>
+<p>Write the function <code>(valid-blocks? board)</code> that returns
+<code>true</code> if every block in <code>board</code> is a valid filled
+block.</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(valid-blocks? solved-board)  <span class="co">;=&gt; truthy</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>(valid-blocks? invalid-board) <span class="co">;=&gt; falsey</span></span></code></pre></div>
 </section>
-
-<p>Finally, we can write a function that checks if the whole board is a valid solution.</p>
-<section class="alert alert-success"><h3>
+<p>Finally, we can write a function that checks if the whole board is a
+valid solution.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 12
 </h3>
-<p>Write the function <code>(valid-solution? board)</code> that returns <code>true</code> if <code>board</code> is a valid solution to sudoku.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(valid-solution? solved-board)  <span class="co">;=&gt; truthy</span>
-(valid-solution? invalid-board) <span class="co">;=&gt; falsey)</span></code></pre>
+<p>Write the function <code>(valid-solution? board)</code> that returns
+<code>true</code> if <code>board</code> is a valid solution to
+sudoku.</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(valid-solution? solved-board)  <span class="co">;=&gt; truthy</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>(valid-solution? invalid-board) <span class="co">;=&gt; falsey)</span></span></code></pre></div>
 </section>
-
-<p>Now we can verify whether or not a solution is valid. However, if we want to actually solve a sudoku, we need to be able to modify a partial solution.</p>
-<p>Earlier we saw how useful <code>get-in</code> can be when indexing nested structures. Theres a similar function for changing nested structures, called <code>assoc-in</code>. <code>(assoc-in nested-structure path new-value)</code> changes the value pointed by <code>path</code>, which is a sequence of keys. Here’s an example:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure"> (<span class="kw">assoc-in</span> [[<span class="kw">:a</span> <span class="kw">:b</span>] [<span class="kw">:c</span> <span class="kw">:d</span>]] [<span class="dv">1</span>                                  <span class="dv">0</span>] <span class="kw">:E</span>)
-<span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 (assoc (get [[:a :b] [:c :d]] 1) 0  :E))</span>
-<span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 (assoc               [:c :d]     0  :E))</span>
-<span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 [:E :d])</span>
-<span class="co">;=&gt;        [[:a :b] [:E :d]]</span></code></pre>
-<p>Now we can write a function to change a single value in our representation of a sudoku.</p>
-<section class="alert alert-success"><h3>
+<p>Now we can verify whether or not a solution is valid. However, if we
+want to actually solve a sudoku, we need to be able to modify a partial
+solution.</p>
+<p>Earlier we saw how useful <code>get-in</code> can be when indexing
+nested structures. Theres a similar function for changing nested
+structures, called <code>assoc-in</code>.
+<code>(assoc-in nested-structure path new-value)</code> changes the
+value pointed by <code>path</code>, which is a sequence of keys. Here’s
+an example:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a> (<span class="kw">assoc-in</span> [[<span class="at">:a</span> <span class="at">:b</span>] [<span class="at">:c</span> <span class="at">:d</span>]] [<span class="dv">1</span>                                  <span class="dv">0</span>] <span class="at">:E</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 (assoc (get [[:a :b] [:c :d]] 1) 0  :E))</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 (assoc               [:c :d]     0  :E))</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (assoc [[:a :b] [:c :d]]  1 [:E :d])</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt;        [[:a :b] [:E :d]]</span></span></code></pre></div>
+<p>Now we can write a function to change a single value in our
+representation of a sudoku.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 13
 </h3>
-<p>Write the function <code>(set-value-at board coord new-value)</code> that changes the value at <code>coord</code> in <code>board</code> to <code>new-value</code>.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">def</span><span class="fu"> before-change</span>
-  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]
-          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]
-          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]
-          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]
-          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))
-
-(<span class="kw">def</span><span class="fu"> after-change</span>
-  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">4</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]
-          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]
-          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]
-          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]
-          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]
-          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))
-
-(set-value-at before-change [<span class="dv">2</span> <span class="dv">1</span>] <span class="dv">4</span>)</code></pre>
+<p>Write the function <code>(set-value-at board coord new-value)</code>
+that changes the value at <code>coord</code> in <code>board</code> to
+<code>new-value</code>.</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> before-change</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">9</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> after-change</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  (board [[<span class="dv">5</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>]</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">4</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span>]</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">3</span>]</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">4</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">3</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span>]</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">7</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">6</span>]</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">0</span>]</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span> <span class="dv">1</span> <span class="dv">9</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">5</span>]</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>          [<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">8</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">7</span> <span class="dv">9</span>]]))</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>(set-value-at before-change [<span class="dv">2</span> <span class="dv">1</span>] <span class="dv">4</span>)</span></code></pre></div>
 </section>
-
-<p>Now that we can change the board, the next obstacle is figuring out what to change. Now we need to find an empty point in the sudoku board.</p>
-<section class="alert alert-success"><h3>
+<p>Now that we can change the board, the next obstacle is figuring out
+what to change. Now we need to find an empty point in the sudoku
+board.</p>
+<section class="alert alert-success">
+<h3>
 Exercise 14
 </h3>
-Write the function <code>(find-empty-point board)</code> that returns coordinates to an empty point (that is, in our representation has value <span class="math">\(0\)</span>).
+Write the function <code>(find-empty-point board)</code> that returns
+coordinates to an empty point (that is, in our representation has value
+<span class="math inline">\(0\)</span>).
 </section>
-
-<p>Okay, so now we can find an empty location and we also know what the valid values for that location are. What’s left is to try each one of those values in that location and trying to solve the rest. This is called backtracking search. You try one choice and recurse, if the recursive call didn’t find any solutions, try the next choice. If none of the choices return a valid solution, return <code>nil</code>.</p>
-<p>Let’s take a small detour and see an example of backtracking search.</p>
+<p>Okay, so now we can find an empty location and we also know what the
+valid values for that location are. What’s left is to try each one of
+those values in that location and trying to solve the rest. This is
+called backtracking search. You try one choice and recurse, if the
+recursive call didn’t find any solutions, try the next choice. If none
+of the choices return a valid solution, return <code>nil</code>.</p>
+<p>Let’s take a small detour and see an example of backtracking
+search.</p>
 <section id="subset-sum" class="level3">
 <h3>Subset Sum</h3>
-<p>Subset sum is a classic problem. Here’s how it goes. You are given:</p>
+<p>Subset sum is a classic problem. Here’s how it goes. You are
+given:</p>
 <ul>
 <li>a set of numbers, like <code>#{1 2 10 5 7}</code></li>
 <li>and a number, say <code>23</code></li>
 </ul>
-<p>and you want to know if there is some subset of the original set that sums up to the target. We’re going to solve this by brute force using a backtracking search.</p>
+<p>and you want to know if there is some subset of the original set that
+sums up to the target. We’re going to solve this by brute force using a
+backtracking search.</p>
 <p>Here’s one way to implement it:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> sum </span>[a-seq]
-  (<span class="kw">reduce</span> <span class="kw">+</span> a-seq))
-
-(<span class="kw">defn</span><span class="fu"> subset-sum-helper </span>[a-set current-set target]
-  (<span class="kw">if</span> (<span class="kw">=</span> (sum current-set) target)
-    [current-set]
-    (<span class="kw">let</span> [remaining (clojure.set/difference a-set current-set)]
-      (<span class="kw">for</span> [elem remaining
-            solution (subset-sum-helper a-set
-                                        (<span class="kw">conj</span> current-set elem)
-                                        target)]
-        solution))))
-
-(<span class="kw">defn</span><span class="fu"> subset-sum </span>[a-set target]
-  (subset-sum-helper a-set #{} target))</code></pre>
-<p>So the main thing happens inside <code>subset-sum-helper</code>. First of all, always check if we have found a valid solution. Here it’s checked with</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">  (<span class="kw">if</span> (<span class="kw">=</span> (sum current-set) target)
-    [current-set]</code></pre>
-<p>If we have found a valid solution, return it in a vector (We’ll see soon why in a vector). Okay, so if we’re not done yet, what are our options? Well, we need to try adding some element of <code>a-set</code> into <code>current-set</code> and try again. What are the possible elements for this? They are those that are not yet in <code>current-set</code>. Those are bound to the name <code>remaining</code> here:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">    (<span class="kw">let</span> [remaining (clojure.set/difference a-set current-set)]</code></pre>
-<p>What’s left is to actually try calling <code>subset-sum-helper</code> with each new set obtainable in this way:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">      (<span class="kw">for</span> [elem remaining
-            solution (subset-sum-helper a-set
-                                        (<span class="kw">conj</span> current-set elem)
-                                        target)]
-        solution))))</code></pre>
-<p>Here first <code>elem</code> gets bound to the elements of <code>remaining</code> one at a time. For each <code>elem</code>, <code>solution</code> gets bound to each element of the recursive call</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">            solution (subset-sum-helper a-set
-                                        (<span class="kw">conj</span> current-set elem)
-                                        target)]</code></pre>
-<p>And this is the reason we returned a vector in the base case, so that we can use <code>for</code> in this way. Finally, we return each such <code>solution</code> in a sequence.</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> sum </span>[a-seq]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">reduce</span> <span class="kw">+</span> a-seq))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> subset-sum-helper </span>[a-set current-set target]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">if</span> (<span class="kw">=</span> (sum current-set) target)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    [current-set]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">let</span> [remaining (clojure.set/difference a-set current-set)]</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">for</span> [elem remaining</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>            solution (subset-sum-helper a-set</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                                        (<span class="kw">conj</span> current-set elem)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                                        target)]</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>        solution))))</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> subset-sum </span>[a-set target]</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  (subset-sum-helper a-set #{} target))</span></code></pre></div>
+<p>So the main thing happens inside <code>subset-sum-helper</code>.
+First of all, always check if we have found a valid solution. Here it’s
+checked with</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">if</span> (<span class="kw">=</span> (sum current-set) target)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    [current-set]</span></code></pre></div>
+<p>If we have found a valid solution, return it in a vector (We’ll see
+soon why in a vector). Okay, so if we’re not done yet, what are our
+options? Well, we need to try adding some element of <code>a-set</code>
+into <code>current-set</code> and try again. What are the possible
+elements for this? They are those that are not yet in
+<code>current-set</code>. Those are bound to the name
+<code>remaining</code> here:</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">let</span> [remaining (clojure.set/difference a-set current-set)]</span></code></pre></div>
+<p>What’s left is to actually try calling <code>subset-sum-helper</code>
+with each new set obtainable in this way:</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">for</span> [elem remaining</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>            solution (subset-sum-helper a-set</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                                        (<span class="kw">conj</span> current-set elem)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                                        target)]</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        solution))))</span></code></pre></div>
+<p>Here first <code>elem</code> gets bound to the elements of
+<code>remaining</code> one at a time. For each <code>elem</code>,
+<code>solution</code> gets bound to each element of the recursive
+call</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>            solution (subset-sum-helper a-set</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                                        (<span class="kw">conj</span> current-set elem)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                                        target)]</span></code></pre></div>
+<p>And this is the reason we returned a vector in the base case, so that
+we can use <code>for</code> in this way. Finally, we return each such
+<code>solution</code> in a sequence.</p>
 <p>So let’s try this out:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">    (subset-sum #{<span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">10</span> <span class="dv">9</span> <span class="dv">23</span>} <span class="dv">20</span>)
-<span class="co">;=&gt; (#{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10})</span></code></pre>
-<p>Okay, so the above example is not exactly optimal. It forms each set many times. Since we were only interested in one solution, however, we can just add <code>first</code> to the call if the helper:</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">defn</span><span class="fu"> subset-sum </span>[a-set target]
-  (<span class="kw">first</span> (subset-sum-helper a-set #{} target)))</code></pre>
-<p>And due to the way Clojure uses laziness, this actually cuts the computation after a solution is found (well, to be exact, after 32 solutions have been found due to the way Clojure chunks lazy sequences).</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>    (subset-sum #{<span class="dv">1</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">10</span> <span class="dv">9</span> <span class="dv">23</span>} <span class="dv">20</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">;=&gt; (#{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10} #{1 9 10})</span></span></code></pre></div>
+<p>Okay, so the above example is not exactly optimal. It forms each set
+many times. Since we were only interested in one solution, however, we
+can just add <code>first</code> to the call if the helper:</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> subset-sum </span>[a-set target]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">first</span> (subset-sum-helper a-set #{} target)))</span></code></pre></div>
+<p>And due to the way Clojure uses laziness, this actually cuts the
+computation after a solution is found (well, to be exact, after 32
+solutions have been found due to the way Clojure chunks lazy
+sequences).</p>
 </section>
 <section id="solving-sudokus" class="level3">
 <h3>Solving Sudokus</h3>
 <p>It’s finally time to write the search for a solution to sudokus.</p>
-<section class="alert alert-success"><h3>
+<section class="alert alert-success">
+<h3>
 Exercise 15
 </h3>
-<p>Write the function <code>(solve board)</code> which takes a sudoku board as a parameter and returns a valid solution to the given sudoku.</p>
-<pre class="sourceCode clojure"><code class="sourceCode clojure">  (solve sudoku-board) =&gt; solved-board</code></pre>
+<p>Write the function <code>(solve board)</code> which takes a sudoku
+board as a parameter and returns a valid solution to the given
+sudoku.</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode clojure"><code class="sourceCode clojure"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>  (solve sudoku-board) =&gt; solved-board</span></code></pre></div>
 <p>Recap of backtracking:</p>
 <ul>
-<li>check if you are at the end</li>
+<li>check if you are at the end
+<ul>
 <li>if so, is the solution valid?
 <ul>
 <li>if not, return an empty sequence</li>
@@ -448,12 +661,11 @@ Exercise 15
 <li>if not
 <ul>
 <li>select an empty location</li>
-<li>try solving with each valid value for that location
-</section>
-
-</li>
+<li>try solving with each valid value for that location</li>
+</ul></li>
 </ul></li>
 </ul>
+</section>
 </section>
 </section>
 <footer>
