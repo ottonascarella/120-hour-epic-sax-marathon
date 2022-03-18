@@ -4,7 +4,7 @@ redo-ifchange "$SRC"
 
 pandoc                              \
     --to latex                      \
-    --smart                         \
+    +smart                          \
     --standalone                    \
     --out "$3"                      \
     -V documentclass:report         \
